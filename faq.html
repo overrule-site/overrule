@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OVERRULE Community - الأسئلة الشائعة</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&family=Orbitron:wght@500;700;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary-red: #E70000;
+      --dark-red: #A30000;
+      --background-dark: #0A0A0A;
+      --text-light: #F0F0F0;
+      --border-color: #333333;
+      --glow-color: #FF3333;
+      --gradient-start: #101010;
+      --gradient-end: #000000;
+      --primary-red-rgb: 231,0,0; /* Utility for rgba */
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Cairo', sans-serif;
+      background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+      color: var(--text-light);
+      text-align: center;
+      line-height: 1.6;
+      overflow-x: hidden;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Navigation Bar */
+    .navbar {
+      background-color: #000000;
+      padding: 15px 0;
+      border-bottom: 1px solid var(--primary-red);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .navbar-container {
+      display: flex;
+      justify-content: center;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    .nav-item {
+      position: relative;
+      margin: 0 25px;
+    }
+
+    .nav-link {
+      color: var(--text-light);
+      text-decoration: none;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.1em;
+      padding: 10px 15px;
+      transition: color 0.3s ease, text-shadow 0.3s ease;
+      position: relative;
+      z-index: 1;
+      letter-spacing: 1px;
+    }
+
+    .nav-link::before {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      width: 0;
+      height: 3px;
+      background-color: var(--primary-red);
+      transition: all 0.3s ease-in-out;
+      transform: translateX(-50%);
+    }
+
+    .nav-link:hover {
+      color: var(--primary-red);
+      text-shadow: 0 0 10px var(--glow-color);
+    }
+
+    .nav-link:hover::before {
+      width: 100%;
+    }
+
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: #1a1a1a;
+      min-width: 180px;
+      box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.6);
+      z-index: 1;
+      left: 50%;
+      transform: translateX(-50%);
+      top: 100%; /* Position below the parent link */
+      border-radius: 8px;
+      overflow: hidden;
+      border: 1px solid var(--dark-red);
+      padding: 10px 0;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s ease, visibility 0.3s ease;
+      margin-top: 10px; /* Space between nav link and dropdown */
+    }
+
+    .nav-item:hover .dropdown-content {
+      display: block;
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .dropdown-content a {
+      color: var(--text-light);
+      padding: 12px 16px;
+      text-decoration: none;
+      display: block;
+      text-align: center;
+      font-family: 'Cairo', sans-serif;
+      font-size: 0.95em;
+      transition: background-color 0.3s ease, color 0.3s ease;
+      letter-spacing: 0.5px;
+    }
+
+    .dropdown-content a:hover {
+      background-color: var(--dark-red);
+      color: white;
+      text-shadow: 0 0 5px rgba(255,255,255,0.5);
+    }
+
+    header {
+      /* التعديلات هنا */
+      background-image: url('banner.png'); /* اسم ملف الصورة */
+      background-size: cover; /* لضمان تغطية الصورة بالكامل */
+      background-position: center; /* لتركيز الصورة في المنتصف */
+      background-repeat: no-repeat; /* لعدم تكرار الصورة */
+      min-height: 300px; /* ارتفاع أدنى للهيدر لضمان ظهور البانر */
+      padding: 80px 20px 60px;
+      position: relative;
+      overflow: hidden;
+      border-bottom: 2px solid var(--primary-red);
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+      display: flex; /* لتمكين توسيط المحتوى عمودياً وأفقياً */
+      align-items: center; /* توسيط عمودي */
+      justify-content: center; /* توسيط أفقي */
+    }
+
+    header::before {
+      /* للحفاظ على تأثير الغلو لكن بشفافية أكبر فوق الصورة */
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, rgba(var(--dark-red), 0.5), rgba(var(--primary-red), 0.5)); /* تدرج لوني شبه شفاف */
+      z-index: 0;
+      opacity: 0.7; /* لضمان وضوح البانر مع إضفاء لمسة حمراء */
+    }
+
+    header h1 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 6vw; /* Responsive font size */
+      margin: 0;
+      position: relative;
+      z-index: 1;
+      text-transform: uppercase;
+      letter-spacing: 6px; /* Adjusted letter spacing */
+      text-shadow: 0 0 25px var(--glow-color); /* Adjusted glow */
+      animation: headerGlow 4s infinite alternate ease-in-out;
+      color: white;
+      padding: 20px; /* إضافة بعض المسافة الداخلية للنص لكي لا يلتصق بالحواف */
+      background-color: rgba(0, 0, 0, 0.4); /* خلفية سوداء شبه شفافة للنص لزيادة وضوحه */
+      border-radius: 10px; /* حواف دائرية لخلفية النص */
+    }
+    
+    @media (min-width: 768px) {
+      header h1 {
+        font-size: 70px; /* Slightly smaller for FAQ header */
+      }
+    }
+
+    @keyframes headerGlow {
+      from { text-shadow: 0 0 15px var(--glow-color), 0 0 30px rgba(255,0,0,0.7); }
+      to { text-shadow: 0 0 30px var(--glow-color), 0 0 60px rgba(255,50,50,0.9); }
+    }
+
+    .faq-container {
+      flex-grow: 1;
+      padding: 60px 20px;
+      max-width: 900px; /* Slightly narrower for FAQ content */
+      margin: auto;
+      text-align: right; /* RTL text alignment */
+    }
+
+    .faq-item {
+      background: rgba(var(--primary-red-rgb), 0.05);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      margin-bottom: 25px;
+      padding: 25px 30px;
+      box-shadow: 0 0 20px rgba(var(--primary-red-rgb), 0.1);
+      transition: all 0.3s ease-in-out;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .faq-item:hover {
+      transform: translateY(-5px);
+      border-color: var(--primary-red);
+      box-shadow: 0 8px 30px rgba(var(--primary-red-rgb), 0.3);
+      background: rgba(var(--primary-red-rgb), 0.08);
+    }
+
+    .faq-question {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.5em;
+      color: var(--primary-red);
+      margin-top: 0;
+      margin-bottom: 15px;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      text-shadow: 0 0 8px rgba(var(--primary-red-rgb), 0.5);
+      letter-spacing: 0.5px;
+    }
+
+    .faq-question::before {
+      content: '+';
+      font-size: 1.2em;
+      margin-left: 10px; /* Adjust for RTL */
+      transition: transform 0.3s ease;
+    }
+
+    .faq-question.active::before {
+      content: '-';
+      transform: rotate(0deg); /* No rotation for - */
+    }
+
+    .faq-answer {
+      font-size: 1.05em;
+      color: var(--text-light);
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease-out, opacity 0.4s ease-out;
+      opacity: 0;
+      padding-right: 25px; /* Adjust for RTL */
+      padding-left: 0;
+    }
+
+    .faq-answer.active {
+      max-height: 150px; /* Adjust based on expected content height */
+      opacity: 1;
+      padding-top: 10px;
+    }
+
+    footer {
+      margin-top: 60px;
+      padding: 30px;
+      background: #000000;
+      font-size: 0.9em;
+      color: #999;
+      border-top: 1px solid #1a1a1a;
+      box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.4);
+      position: relative;
+      z-index: 1;
+    }
+
+    footer span {
+      color: var(--primary-red);
+      font-weight: bold;
+      letter-spacing: 0.5px;
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <div class="navbar-container">
+      <div class="nav-item">
+        <a href="#" class="nav-link">LEADERBOARD</a>
+        <div class="dropdown-content">
+          <a href="servercounting.html">SERVER COUNTING</a>
+          <a href="text.html">TEXT</a>
+          <a href="voice.html">VOICE</a>
+        </div>
+      </div>
+      <div class="nav-item">
+        <a href="index.html" class="nav-link">OVERVIEW</a>
+      </div>
+      <div class="nav-item">
+        <a href="faq.html" class="nav-link">FAQ</a>
+      </div>
+    </div>
+  </nav>
+
+  <header>
+    <h1>الأسئلة الشائعة</h1>
+  </header>
+
+  <main class="faq-container">
+    <div class="faq-item">
+      <h2 class="faq-question">كيف أنضم إلى السيرفر؟</h2>
+      <p class="faq-answer">اضغط على زر "انضم إلينا على ديسكورد" وقم بقبول الدعوة.</p>
+    </div>
+
+    <div class="faq-item">
+      <h2 class="faq-question">هل هناك شرط عمر؟</h2>
+      <p class="faq-answer">نعم، يجب أن يكون عمر الأعضاء 15 عامًا أو أكثر حسب قوانين ديسكورد.</p>
+    </div>
+
+    <div class="faq-item">
+      <h2 class="faq-question">هل أحتاج مايكروفون للمشاركة في الفعاليات؟</h2>
+      <p class="faq-answer">الميكروفون مطلوب فقط للتحقق. بعد ذلك، يمكنك المشاركة في الدردشات والفعاليات بدون مايك.</p>
+    </div>
+
+    <div class="faq-item">
+      <h2 class="faq-question">هل هناك قواعد يجب أن أتبعها؟</h2>
+      <p class="faq-answer">نعم، يرجى قراءة قناة قواعد السيرفر للتأكد من احترامك للمجتمع.</p>
+    </div>
+
+    <div class="faq-item">
+      <h2 class="faq-question">هل يمكنني دعوة أصدقائي إلى السيرفر؟</h2>
+      <p class="faq-answer">بالطبع! من المُستحسن مشاركة رابط الدعوة.</p>
+    </div>
+
+    <div class="faq-item">
+      <h2 class="faq-question">ما نوع الفعاليات التي تستضيفونها؟</h2>
+      <p class="faq-answer">نستضيف ليالي الألعاب، مسابقات الفن، حفلات مشاهدة الأفلام، وتحديات المجتمع.</p>
+    </div>
+
+    <div class="faq-item">
+      <h2 class="faq-question">كيف يمكنني الحصول على رتبة خاصة؟</h2>
+      <p class="faq-answer">يتم منح الرتب الخاصة للمشاركة والمساهمات والفوز بالفعاليات.</p>
+    </div>
+
+    <div class="faq-item">
+      <h2 class="faq-question">هل يتم مراقبة السيرفر؟</h2>
+      <p class="faq-answer">نعم، لدينا مشرفون لضمان أن يبقى المجتمع ودودًا وآمنًا.</p>
+    </div>
+
+    <div class="faq-item">
+      <h2 class="faq-question">هل يمكنني مشاركة المحتوى الخاص بي؟</h2>
+      <p class="faq-answer">نعم، يمكنك مشاركة الفن، الميمات، والمحتوى الآخر في القنوات المناسبة.</p>
+    </div>
+
+    <div class="faq-item">
+      <h2 class="faq-question">من يمكنني التواصل معه للحصول على المساعدة؟</h2>
+      <p class="faq-answer">يمكنك مراسلة أي مشرف أو استخدام قنوات الدعم / المساعدة في السيرفر.</p>
+    </div>
+  </main>
+
+  <footer>
+    هذا الموقع من تصميم وتطوير <span>Leo Mh</span> &copy; 2023. جميع الحقوق محفوظة.
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const faqQuestions = document.querySelectorAll('.faq-question');
+
+      faqQuestions.forEach(question => {
+        question.addEventListener('click', function() {
+          const answer = this.nextElementSibling; // The <p> tag is the next sibling
+          
+          this.classList.toggle('active');
+          answer.classList.toggle('active');
+
+          if (answer.classList.contains('active')) {
+            answer.style.maxHeight = answer.scrollHeight + 'px';
+          } else {
+            answer.style.maxHeight = '0';
+          }
+        });
+      });
+    });
+  </script>
+</body>
+</html>

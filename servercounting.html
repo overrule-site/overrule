@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OVERRULE Community - Server Counting Leaderboard</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&family=Orbitron:wght@500;700;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary-red: #E70000;
+      --dark-red: #A30000;
+      --background-dark: #0A0A0A;
+      --text-light: #F0F0F0;
+      --border-color: #333333;
+      --glow-color: #FF3333;
+      --gradient-start: #101010;
+      --gradient-end: #000000;
+      --primary-red-rgb: 231,0,0; /* Utility for rgba */
+      --discord-blue: #5865F2; /* Discord brand color */
+
+      /* Leaderboard specific colors */
+      --gold: #FFD700;
+      --silver: #C0C0C0;
+      --bronze: #CD7F32;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Cairo', sans-serif;
+      background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+      color: var(--text-light);
+      text-align: center;
+      line-height: 1.6;
+      overflow-x: hidden;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Navigation Bar */
+    .navbar {
+      background-color: #000000;
+      padding: 15px 0;
+      border-bottom: 1px solid var(--primary-red);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .navbar-container {
+      display: flex;
+      justify-content: center;
+      align-items: center; /* Align items vertically */
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    .nav-item {
+      position: relative;
+      margin: 0 25px;
+    }
+
+    .nav-link {
+      color: var(--text-light);
+      text-decoration: none;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.1em;
+      padding: 10px 15px;
+      transition: color 0.3s ease, text-shadow 0.3s ease;
+      position: relative;
+      z-index: 1;
+      letter-spacing: 1px;
+    }
+
+    .nav-link::before {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      width: 0;
+      height: 3px;
+      background-color: var(--primary-red);
+      transition: all 0.3s ease-in-out;
+      transform: translateX(-50%);
+    }
+
+    .nav-link:hover {
+      color: var(--primary-red);
+      text-shadow: 0 0 10px var(--glow-color);
+    }
+
+    .nav-link:hover::before {
+      width: 100%;
+    }
+
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: #1a1a1a;
+      min-width: 180px;
+      box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.6);
+      z-index: 1;
+      left: 50%;
+      transform: translateX(-50%);
+      top: 100%; /* Position below the parent link */
+      border-radius: 8px;
+      overflow: hidden;
+      border: 1px solid var(--dark-red);
+      padding: 10px 0;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s ease, visibility 0.3s ease;
+      margin-top: 10px; /* Space between nav link and dropdown */
+    }
+
+    .nav-item:hover .dropdown-content {
+      display: block;
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .dropdown-content a {
+      color: var(--text-light);
+      padding: 12px 16px;
+      text-decoration: none;
+      display: block;
+      text-align: center;
+      font-family: 'Cairo', sans-serif;
+      font-size: 0.95em;
+      transition: background-color 0.3s ease, color 0.3s ease;
+      letter-spacing: 0.5px;
+    }
+
+    .dropdown-content a:hover {
+      background-color: var(--dark-red);
+      color: white;
+      text-shadow: 0 0 5px rgba(255,255,255,0.5);
+    }
+
+    /* Discord Button Specific Styles */
+    .discord-button {
+      background-color: var(--discord-blue);
+      color: white;
+      padding: 10px 20px;
+      border-radius: 50px; /* More rounded pill shape */
+      text-decoration: none;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1em;
+      font-weight: bold;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+      margin-left: 40px; /* Space it out from other nav items */
+      border: 2px solid var(--discord-blue); /* Initial border */
+    }
+
+    .discord-button:hover {
+      background-color: #7289DA; /* Lighter Discord blue on hover */
+      transform: translateY(-3px);
+      box-shadow: 0 6px 20px rgba(var(--discord-blue), 0.6);
+      border-color: #7289DA;
+    }
+
+    .discord-button img {
+      width: 24px; /* Adjust icon size */
+      height: 24px;
+      vertical-align: middle;
+      filter: drop-shadow(0 0 5px rgba(255,255,255,0.7)); /* Subtle glow for icon */
+    }
+
+    /* Header for sub-pages */
+    .sub-page-header {
+      background: linear-gradient(135deg, var(--dark-red), var(--primary-red));
+      padding: 60px 20px;
+      position: relative;
+      overflow: hidden;
+      border-bottom: 2px solid var(--primary-red);
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+      margin-bottom: 40px;
+      min-height: 200px; /* Added min-height for better visual */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .sub-page-header h1 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 5vw; /* Responsive font size */
+      margin: 0;
+      position: relative;
+      z-index: 1;
+      text-transform: uppercase;
+      letter-spacing: 5px;
+      text-shadow: 0 0 20px var(--glow-color);
+      color: white;
+    }
+
+    @media (min-width: 768px) {
+      .sub-page-header h1 {
+        font-size: 60px;
+      }
+    }
+
+    /* Main content area for leaderboard */
+    .leaderboard-container {
+      flex-grow: 1;
+      max-width: 700px;
+      margin: 0px auto 60px auto;
+      background: rgba(var(--primary-red-rgb), 0.05);
+      border: 1px solid var(--border-color);
+      border-radius: 18px;
+      padding: 30px 20px;
+      box-shadow: 0 0 30px rgba(var(--primary-red-rgb), 0.2);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .leaderboard-container::before {
+        content: '';
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: radial-gradient(circle, rgba(var(--primary-red-rgb), 0.1) 0%, transparent 70%);
+        animation: cardPulse 6s infinite alternate ease-in-out;
+        z-index: 0;
+    }
+
+    @keyframes cardPulse {
+        from { transform: scale(1); opacity: 0.3; }
+        to { transform: scale(1.1); opacity: 0.1; }
+    }
+
+    .leaderboard-title {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 2.8em;
+      color: var(--primary-red);
+      text-shadow: 0 0 15px rgba(var(--primary-red-rgb), 0.8);
+      margin-bottom: 40px;
+      position: relative;
+      z-index: 1;
+      letter-spacing: 1.5px;
+    }
+
+    .leaderboard-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      position: relative;
+      z-index: 1;
+    }
+
+    .leaderboard-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      padding: 15px 25px;
+      margin-bottom: 15px;
+      font-size: 1.2em;
+      transition: all 0.3s ease-in-out;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .leaderboard-item:hover {
+      background-color: rgba(var(--primary-red-rgb), 0.1);
+      border-color: var(--primary-red);
+      transform: translateY(-5px);
+      box-shadow: 0 5px 20px rgba(var(--primary-red-rgb), 0.2);
+    }
+
+    .leaderboard-item:nth-child(1) {
+      background: linear-gradient(to right, rgba(var(--primary-red-rgb), 0.2), rgba(255, 215, 0, 0.1)); /* Use RGB values for gold */
+      border-color: var(--gold);
+      box-shadow: 0 0 25px rgba(255, 215, 0, 0.4);
+      animation: goldGlow 2s infinite alternate;
+    }
+    .leaderboard-item:nth-child(2) {
+      background: linear-gradient(to right, rgba(var(--primary-red-rgb), 0.15), rgba(192, 192, 192, 0.1)); /* Use RGB values for silver */
+      border-color: var(--silver);
+      box-shadow: 0 0 18px rgba(192, 192, 192, 0.3);
+    }
+    .leaderboard-item:nth-child(3) {
+      background: linear-gradient(to right, rgba(var(--primary-red-rgb), 0.1), rgba(205, 127, 50, 0.1)); /* Use RGB values for bronze */
+      border-color: var(--bronze);
+      box-shadow: 0 0 12px rgba(205, 127, 50, 0.2);
+    }
+
+    @keyframes goldGlow {
+        from { box-shadow: 0 0 20px rgba(255, 215, 0, 0.4); }
+        to { box-shadow: 0 0 35px rgba(255, 215, 0, 0.7); }
+    }
+
+    .rank {
+      font-family: 'Orbitron', sans-serif;
+      font-weight: 700;
+      width: 40px;
+      text-align: left;
+      color: var(--text-light);
+      margin-right: 15px;
+    }
+
+    .rank.gold { color: var(--gold); text-shadow: 0 0 8px var(--gold); }
+    .rank.silver { color: var(--silver); text-shadow: 0 0 6px var(--silver); }
+    .rank.bronze { color: var(--bronze); text-shadow: 0 0 4px var(--bronze); }
+
+    .username {
+      flex-grow: 1;
+      text-align: right;
+      font-weight: 700;
+      color: var(--text-light);
+      font-size: 1.1em;
+    }
+
+    .username.gold { color: var(--gold); }
+    .username.silver { color: var(--silver); }
+    .username.bronze { color: var(--bronze); }
+
+
+    .counts {
+      font-family: 'Orbitron', sans-serif;
+      font-weight: 900;
+      color: var(--primary-red);
+      margin-left: 20px;
+      font-size: 1.2em;
+      text-shadow: 0 0 5px rgba(var(--primary-red-rgb), 0.7);
+    }
+
+    footer {
+      margin-top: 60px;
+      padding: 30px;
+      background: #000000;
+      font-size: 0.9em;
+      color: #999;
+      border-top: 1px solid #1a1a1a;
+      box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.4);
+      position: relative;
+      z-index: 1;
+    }
+
+    footer span {
+      color: var(--primary-red);
+      font-weight: bold;
+      letter-spacing: 0.5px;
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <div class="navbar-container">
+      <div class="nav-item">
+        <a href="#" class="nav-link">LEADERBOARD</a>
+        <div class="dropdown-content">
+          <a href="servercounting.html">SERVER COUNTING</a>
+          <a href="text.html">TEXT</a>
+          <a href="voice.html">VOICE</a>
+        </div>
+      </div>
+      <div class="nav-item">
+        <a href="index.html" class="nav-link">OVERVIEW</a>
+      </div>
+      <div class="nav-item">
+        <a href="faq.html" class="nav-link">FAQ</a>
+      </div>
+      <!-- Discord Join Button -->
+      <a href="https://discord.gg/885psXPn8K" target="_blank" class="discord-button">
+        <img src="discord.png" alt="Discord Icon">
+        انضم إلينا في Discord
+      </a>
+    </div>
+  </nav>
+
+  <div class="sub-page-header">
+    <h1>SERVER COUNTING</h1>
+  </div>
+
+  <main>
+    <div class="leaderboard-container">
+      <h2 class="leaderboard-title">Server Counting Leaderboard</h2>
+      <ul class="leaderboard-list">
+        <li class="leaderboard-item">
+          <span class="rank gold">🥇</span>
+          <span class="username gold">meranda._.34</span>
+          <span class="counts">135 counts</span>
+        </li>
+        <li class="leaderboard-item">
+          <span class="rank silver">🥈</span>
+          <span class="username silver">yakine_97</span>
+          <span class="counts">112 counts</span>
+        </li>
+        <li class="leaderboard-item">
+          <span class="rank bronze">🥉</span>
+          <span class="username bronze">hazellll20</span>
+          <span class="counts">78 counts</span>
+        </li>
+        <li class="leaderboard-item">
+          <span class="rank">4.</span>
+          <span class="username">syyvoo</span>
+          <span class="counts">76 counts</span>
+        </li>
+        <li class="leaderboard-item">
+          <span class="rank">5.</span>
+          <span class="username">ramzii.i</span>
+          <span class="counts">66 counts</span>
+        </li>
+        <li class="leaderboard-item">
+          <span class="rank">6.</span>
+          <span class="username">daffy.93</span>
+          <span class="counts">53 counts</span>
+        </li>
+        <li class="leaderboard-item">
+          <span class="rank">7.</span>
+          <span class="username">yoxxsha</span>
+          <span class="counts">51 counts</span>
+        </li>
+        <li class="leaderboard-item">
+          <span class="rank">8.</span>
+          <span class="username">satshifaker</span>
+          <span class="counts">43 counts</span>
+        </li>
+        <li class="leaderboard-item">
+          <span class="rank">9.</span>
+          <span class="username">yassmine18</span>
+          <span class="counts">32 counts</span>
+        </li>
+        <li class="leaderboard-item">
+          <span class="rank">10.</span>
+          <span class="username">eldom3463</span>
+          <span class="counts">29 counts</span>
+        </li>
+      </ul>
+    </div>
+  </main>
+
+  <footer>
+    هذا الموقع من تصميم وتطوير <span>Leo Mh</span> &copy; 2023. جميع الحقوق محفوظة.
+  </footer>
+</body>
+</html>
