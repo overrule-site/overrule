@@ -26,7 +26,8 @@
     body {
       margin: 0;
       font-family: 'Cairo', sans-serif;
-      background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+      background: url('banner.png') no-repeat center center fixed; /* Updated background */
+      background-size: cover;
       color: var(--text-light);
       text-align: center;
       line-height: 1.6;
@@ -139,7 +140,7 @@
 
     /* Header for sub-pages */
     .sub-page-header {
-      background: linear-gradient(135deg, var(--dark-red), var(--primary-red));
+      background: linear-gradient(135deg, rgba(163,0,0,0.8), rgba(231,0,0,0.8)); /* Added transparency for background image */
       padding: 60px 20px;
       position: relative;
       overflow: hidden;
@@ -178,6 +179,8 @@
       box-shadow: 0 0 30px rgba(var(--primary-red-rgb), 0.2);
       position: relative;
       overflow: hidden;
+      backdrop-filter: blur(8px); /* Added blur for readability over background image */
+      background-color: rgba(10, 10, 10, 0.7); /* Slightly darker, semi-transparent background */
     }
 
     .leaderboard-container::before {
@@ -350,32 +353,57 @@
 
   <main>
     <div class="leaderboard-container">
-      <h2 class="leaderboard-title">Top 5 Voice 🎤</h2>
+      <h2 class="leaderboard-title">Top 10 Voice 🎤</h2>
       <ul class="leaderboard-list">
         <li class="leaderboard-item">
           <span class="rank gold">#1</span>
           <span class="username gold">@Hazzy 愛</span>
-          <span class="xp">92120 XP</span>
+          <span class="xp">96250 XP</span>
         </li>
         <li class="leaderboard-item">
           <span class="rank silver">#2</span>
           <span class="username silver">@ᵀᴷ ! | RamboX</span>
-          <span class="xp">76730 XP/span>
+          <span class="xp">78110 XP</span>
         </li>
         <li class="leaderboard-item">
           <span class="rank bronze">#3</span>
           <span class="username bronze">@𝑦𝑎𝑛𝑒 夢</span>
-          <span class="xp">65400 XP</span>
+          <span class="xp">69280 XP</span>
         </li>
         <li class="leaderboard-item">
           <span class="rank">#4</span>
           <span class="username">@Khalil</span>
-          <span class="xp">61570 XP</span>
+          <span class="xp">66200 XP</span>
         </li>
         <li class="leaderboard-item">
           <span class="rank">#5</span>
           <span class="username">@Kitten</span>
-          <span class="xp">56590 XP</span>
+          <span class="xp">61320 XP</span>
+        </li>
+        <li class="leaderboard-item">
+          <span class="rank">#6</span>
+          <span class="username">@OG Takumi</span>
+          <span class="xp">50730 XP</span>
+        </li>
+        <li class="leaderboard-item">
+          <span class="rank">#7</span>
+          <span class="username">@! 𝑀𝑒𝑟𝑎𝑛𝑑𝑎</span>
+          <span class="xp">49710 XP</span>
+        </li>
+        <li class="leaderboard-item">
+          <span class="rank">#8</span>
+          <span class="username">@! Hinata Hyuga</span>
+          <span class="xp">39610 XP</span>
+        </li>
+        <li class="leaderboard-item">
+          <span class="rank">#9</span>
+          <span class="username">@mehdy.qlf</span>
+          <span class="xp">39500 XP</span>
+        </li>
+        <li class="leaderboard-item">
+          <span class="rank">#10</span>
+          <span class="username">@Spaydo</span>
+          <span class="xp">33330 XP</span>
         </li>
       </ul>
     </div>
