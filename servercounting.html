@@ -27,7 +27,8 @@
     body {
       margin: 0;
       font-family: 'Cairo', sans-serif;
-      background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+      background: url('banner.png') no-repeat center center fixed; /* Updated background */
+      background-size: cover;
       color: var(--text-light);
       text-align: center;
       line-height: 1.6;
@@ -174,7 +175,7 @@
 
     /* Header for sub-pages */
     .sub-page-header {
-      background: linear-gradient(135deg, var(--dark-red), var(--primary-red));
+      background: linear-gradient(135deg, rgba(163,0,0,0.8), rgba(231,0,0,0.8)); /* Added transparency for background image */
       padding: 60px 20px;
       position: relative;
       overflow: hidden;
@@ -217,6 +218,8 @@
       box-shadow: 0 0 30px rgba(var(--primary-red-rgb), 0.2);
       position: relative;
       overflow: hidden;
+      backdrop-filter: blur(8px); /* Added blur for readability over background image */
+      background-color: rgba(10, 10, 10, 0.7); /* Slightly darker, semi-transparent background */
     }
 
     .leaderboard-container::before {
@@ -388,53 +391,53 @@
       <ul class="leaderboard-list">
         <li class="leaderboard-item">
           <span class="rank gold">🥇</span>
-          <span class="username gold">meranda._.34</span>
-          <span class="counts">135 counts</span>
+          <span class="username gold">lee__xxa</span>
+          <span class="counts">320 counts</span>
         </li>
         <li class="leaderboard-item">
           <span class="rank silver">🥈</span>
-          <span class="username silver">yakine_97</span>
-          <span class="counts">112 counts</span>
+          <span class="username silver">hazellll20</span>
+          <span class="counts">226 counts</span>
         </li>
         <li class="leaderboard-item">
           <span class="rank bronze">🥉</span>
-          <span class="username bronze">hazellll20</span>
-          <span class="counts">78 counts</span>
+          <span class="username bronze">meranda._.34</span>
+          <span class="counts">199 counts</span>
         </li>
         <li class="leaderboard-item">
           <span class="rank">4.</span>
-          <span class="username">syyvoo</span>
-          <span class="counts">76 counts</span>
+          <span class="username">chahir.kem</span>
+          <span class="counts">148 counts</span>
         </li>
         <li class="leaderboard-item">
           <span class="rank">5.</span>
-          <span class="username">ramzii.i</span>
-          <span class="counts">66 counts</span>
+          <span class="username">yakine_97</span>
+          <span class="counts">140 counts</span>
         </li>
         <li class="leaderboard-item">
           <span class="rank">6.</span>
-          <span class="username">daffy.93</span>
-          <span class="counts">53 counts</span>
+          <span class="username">abd7enour</span>
+          <span class="counts">132 counts</span>
         </li>
         <li class="leaderboard-item">
           <span class="rank">7.</span>
-          <span class="username">yoxxsha</span>
-          <span class="counts">51 counts</span>
+          <span class="username">syyvoo</span>
+          <span class="counts">127 counts</span>
         </li>
         <li class="leaderboard-item">
           <span class="rank">8.</span>
-          <span class="username">satshifaker</span>
-          <span class="counts">43 counts</span>
+          <span class="username">daffy.93</span>
+          <span class="counts">117 counts</span>
         </li>
         <li class="leaderboard-item">
           <span class="rank">9.</span>
-          <span class="username">yassmine18</span>
-          <span class="counts">32 counts</span>
+          <span class="username">ramzii.i</span>
+          <span class="counts">73 counts</span>
         </li>
         <li class="leaderboard-item">
           <span class="rank">10.</span>
-          <span class="username">eldom3463</span>
-          <span class="counts">29 counts</span>
+          <span class="username">yoxxsha</span>
+          <span class="counts">71 counts</span>
         </li>
       </ul>
     </div>
