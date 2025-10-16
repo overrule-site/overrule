@@ -15,10 +15,8 @@
       --glow-color: #FF3333;
       --gradient-start: #101010;
       --gradient-end: #000000;
-      --primary-red-rgb: 231,0,0; /* Utility for rgba */
-      --discord-blue: #5865F2; /* Discord brand color */
-
-      /* Leaderboard specific colors */
+      --primary-red-rgb: 231,0,0;
+      --discord-blue: #5865F2;
       --gold: #FFD700;
       --silver: #C0C0C0;
       --bronze: #CD7F32;
@@ -27,7 +25,7 @@
     body {
       margin: 0;
       font-family: 'Cairo', sans-serif;
-      background: url('banner.png') no-repeat center center fixed; /* Updated background */
+      background: url('banner.png') no-repeat center center fixed;
       background-size: cover;
       color: var(--text-light);
       text-align: center;
@@ -38,7 +36,6 @@
       flex-direction: column;
     }
 
-    /* Navigation Bar */
     .navbar {
       background-color: #000000;
       padding: 15px 0;
@@ -52,7 +49,7 @@
     .navbar-container {
       display: flex;
       justify-content: center;
-      align-items: center; /* Align items vertically */
+      align-items: center;
       max-width: 1200px;
       margin: 0 auto;
       padding: 0 20px;
@@ -105,7 +102,7 @@
       z-index: 1;
       left: 50%;
       transform: translateX(-50%);
-      top: 100%; /* Position below the parent link */
+      top: 100%;
       border-radius: 8px;
       overflow: hidden;
       border: 1px solid var(--dark-red);
@@ -113,7 +110,7 @@
       opacity: 0;
       visibility: hidden;
       transition: opacity 0.3s ease, visibility 0.3s ease;
-      margin-top: 10px; /* Space between nav link and dropdown */
+      margin-top: 10px;
     }
 
     .nav-item:hover .dropdown-content {
@@ -140,12 +137,11 @@
       text-shadow: 0 0 5px rgba(255,255,255,0.5);
     }
 
-    /* Discord Button Specific Styles */
     .discord-button {
       background-color: var(--discord-blue);
       color: white;
       padding: 10px 20px;
-      border-radius: 50px; /* More rounded pill shape */
+      border-radius: 50px;
       text-decoration: none;
       font-family: 'Orbitron', sans-serif;
       font-size: 1em;
@@ -155,34 +151,33 @@
       gap: 10px;
       transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
       box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
-      margin-left: 40px; /* Space it out from other nav items */
-      border: 2px solid var(--discord-blue); /* Initial border */
+      margin-left: 40px;
+      border: 2px solid var(--discord-blue);
     }
 
     .discord-button:hover {
-      background-color: #7289DA; /* Lighter Discord blue on hover */
+      background-color: #7289DA;
       transform: translateY(-3px);
-      box-shadow: 0 6px 20px rgba(var(--discord-blue), 0.6);
+      box-shadow: 0 6px 20px rgba(88, 101, 242, 0.6);
       border-color: #7289DA;
     }
 
     .discord-button img {
-      width: 24px; /* Adjust icon size */
+      width: 24px;
       height: 24px;
       vertical-align: middle;
-      filter: drop-shadow(0 0 5px rgba(255,255,255,0.7)); /* Subtle glow for icon */
+      filter: drop-shadow(0 0 5px rgba(255,255,255,0.7));
     }
 
-    /* Header for sub-pages */
     .sub-page-header {
-      background: linear-gradient(135deg, rgba(163,0,0,0.8), rgba(231,0,0,0.8)); /* Added transparency for background image */
+      background: linear-gradient(135deg, rgba(163,0,0,0.8), rgba(231,0,0,0.8));
       padding: 60px 20px;
       position: relative;
       overflow: hidden;
       border-bottom: 2px solid var(--primary-red);
       box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
       margin-bottom: 40px;
-      min-height: 200px; /* Added min-height for better visual */
+      min-height: 200px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -190,7 +185,7 @@
 
     .sub-page-header h1 {
       font-family: 'Orbitron', sans-serif;
-      font-size: 5vw; /* Responsive font size */
+      font-size: 5vw;
       margin: 0;
       position: relative;
       z-index: 1;
@@ -206,7 +201,6 @@
       }
     }
 
-    /* Main content area for leaderboard */
     .leaderboard-container {
       flex-grow: 1;
       max-width: 700px;
@@ -218,25 +212,25 @@
       box-shadow: 0 0 30px rgba(var(--primary-red-rgb), 0.2);
       position: relative;
       overflow: hidden;
-      backdrop-filter: blur(8px); /* Added blur for readability over background image */
-      background-color: rgba(10, 10, 10, 0.7); /* Slightly darker, semi-transparent background */
+      backdrop-filter: blur(8px);
+      background-color: rgba(10, 10, 10, 0.7);
     }
 
     .leaderboard-container::before {
-        content: '';
-        position: absolute;
-        top: -50%;
-        left: -50%;
-        width: 200%;
-        height: 200%;
-        background: radial-gradient(circle, rgba(var(--primary-red-rgb), 0.1) 0%, transparent 70%);
-        animation: cardPulse 6s infinite alternate ease-in-out;
-        z-index: 0;
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(var(--primary-red-rgb), 0.1) 0%, transparent 70%);
+      animation: cardPulse 6s infinite alternate ease-in-out;
+      z-index: 0;
     }
 
     @keyframes cardPulse {
-        from { transform: scale(1); opacity: 0.3; }
-        to { transform: scale(1.1); opacity: 0.1; }
+      from { transform: scale(1); opacity: 0.3; }
+      to { transform: scale(1.1); opacity: 0.1; }
     }
 
     .leaderboard-title {
@@ -281,25 +275,27 @@
     }
 
     .leaderboard-item:nth-child(1) {
-      background: linear-gradient(to right, rgba(var(--primary-red-rgb), 0.2), rgba(255, 215, 0, 0.1)); /* Use RGB values for gold */
+      background: linear-gradient(to right, rgba(var(--primary-red-rgb), 0.2), rgba(255, 215, 0, 0.1));
       border-color: var(--gold);
       box-shadow: 0 0 25px rgba(255, 215, 0, 0.4);
       animation: goldGlow 2s infinite alternate;
     }
+
     .leaderboard-item:nth-child(2) {
-      background: linear-gradient(to right, rgba(var(--primary-red-rgb), 0.15), rgba(192, 192, 192, 0.1)); /* Use RGB values for silver */
+      background: linear-gradient(to right, rgba(var(--primary-red-rgb), 0.15), rgba(192, 192, 192, 0.1));
       border-color: var(--silver);
       box-shadow: 0 0 18px rgba(192, 192, 192, 0.3);
     }
+
     .leaderboard-item:nth-child(3) {
-      background: linear-gradient(to right, rgba(var(--primary-red-rgb), 0.1), rgba(205, 127, 50, 0.1)); /* Use RGB values for bronze */
+      background: linear-gradient(to right, rgba(var(--primary-red-rgb), 0.1), rgba(205, 127, 50, 0.1));
       border-color: var(--bronze);
       box-shadow: 0 0 12px rgba(205, 127, 50, 0.2);
     }
 
     @keyframes goldGlow {
-        from { box-shadow: 0 0 20px rgba(255, 215, 0, 0.4); }
-        to { box-shadow: 0 0 35px rgba(255, 215, 0, 0.7); }
+      from { box-shadow: 0 0 20px rgba(255, 215, 0, 0.4); }
+      to { box-shadow: 0 0 35px rgba(255, 215, 0, 0.7); }
     }
 
     .rank {
@@ -326,7 +322,6 @@
     .username.gold { color: var(--gold); }
     .username.silver { color: var(--silver); }
     .username.bronze { color: var(--bronze); }
-
 
     .counts {
       font-family: 'Orbitron', sans-serif;
@@ -373,7 +368,6 @@
       <div class="nav-item">
         <a href="faq.html" class="nav-link">FAQ</a>
       </div>
-      <!-- Discord Join Button -->
       <a href="https://discord.gg/885psXPn8K" target="_blank" class="discord-button">
         <img src="discord.png" alt="Discord Icon">
         انضم إلينا في Discord
@@ -387,64 +381,75 @@
 
   <main>
     <div class="leaderboard-container">
-      <h2 class="leaderboard-title">Server Counting Leaderboard</h2>
-      <ul class="leaderboard-list">
-        <li class="leaderboard-item">
-          <span class="rank gold">🥇</span>
-          <span class="username gold">lee__xxa</span>
-          <span class="counts">320 counts</span>
-        </li>
-        <li class="leaderboard-item">
-          <span class="rank silver">🥈</span>
-          <span class="username silver">hazellll20</span>
-          <span class="counts">226 counts</span>
-        </li>
-        <li class="leaderboard-item">
-          <span class="rank bronze">🥉</span>
-          <span class="username bronze">meranda._.34</span>
-          <span class="counts">199 counts</span>
-        </li>
-        <li class="leaderboard-item">
-          <span class="rank">4.</span>
-          <span class="username">chahir.kem</span>
-          <span class="counts">148 counts</span>
-        </li>
-        <li class="leaderboard-item">
-          <span class="rank">5.</span>
-          <span class="username">yakine_97</span>
-          <span class="counts">140 counts</span>
-        </li>
-        <li class="leaderboard-item">
-          <span class="rank">6.</span>
-          <span class="username">abd7enour</span>
-          <span class="counts">132 counts</span>
-        </li>
-        <li class="leaderboard-item">
-          <span class="rank">7.</span>
-          <span class="username">syyvoo</span>
-          <span class="counts">127 counts</span>
-        </li>
-        <li class="leaderboard-item">
-          <span class="rank">8.</span>
-          <span class="username">daffy.93</span>
-          <span class="counts">117 counts</span>
-        </li>
-        <li class="leaderboard-item">
-          <span class="rank">9.</span>
-          <span class="username">ramzii.i</span>
-          <span class="counts">73 counts</span>
-        </li>
-        <li class="leaderboard-item">
-          <span class="rank">10.</span>
-          <span class="username">yoxxsha</span>
-          <span class="counts">71 counts</span>
-        </li>
+      <h2 class="leaderboard-title">Top 10 Players</h2>
+      <ul id="leaderboard" class="leaderboard-list">
+        <!-- Firebase data will fill here -->
       </ul>
     </div>
   </main>
 
   <footer>
-    هذا الموقع من تصميم وتطوير <span>Leo Mh</span> &copy; 2023. جميع الحقوق محفوظة.
+    هذا الموقع من تصميم وتطوير <span>LB4 Company</span> &copy; 2025. جميع الحقوق محفوظة.
   </footer>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.3/firebase-app.js";
+    import { getFirestore, doc, onSnapshot } from "https://www.gstatic.com/firebasejs/10.12.3/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyCW7TGm8FQXKasKKeKXw7-f6cZzPOzhGiU",
+      authDomain: "lb4-messenger.firebaseapp.com",
+      projectId: "lb4-messenger",
+      storageBucket: "lb4-messenger.firebasestorage.app",
+      messagingSenderId: "373210384215",
+      appId: "1:373210384215:web:1a23ab2832bfbacd256012",
+      measurementId: "G-EQ7GH30WFQ"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    function escapeHtml(s){ 
+      return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); 
+    }
+
+    const listEl = document.getElementById('leaderboard');
+    const medals = ['🥇', '🥈', '🥉'];
+    const rankClasses = ['gold', 'silver', 'bronze'];
+
+    function renderEntries(entries){
+      listEl.innerHTML = '';
+      for(let i=0; i<10; i++){
+        const item = (Array.isArray(entries) && entries[i]) ? entries[i] : { name: '', count: 0 };
+        const li = document.createElement('li');
+        li.className = 'leaderboard-item';
+        
+        const rankText = i < 3 ? medals[i] : `${i+1}.`;
+        const rankClass = i < 3 ? rankClasses[i] : '';
+        const usernameClass = i < 3 ? rankClasses[i] : '';
+        
+        li.innerHTML = `
+          <span class="rank ${rankClass}">${rankText}</span>
+          <span class="username ${usernameClass}">${escapeHtml(item.name) || '—'}</span>
+          <span class="counts">${escapeHtml(String(item.count || 0))} counts</span>
+        `;
+        listEl.appendChild(li);
+      }
+    }
+
+    const docRef = doc(db, 'leaderboard', 'servercounting');
+    onSnapshot(docRef, (snap) => {
+      if (!snap.exists()) {
+        renderEntries([]);
+        return;
+      }
+      const data = snap.data();
+      const entries = Array.isArray(data.entries) ? data.entries : [];
+      renderEntries(entries);
+    }, (err) => {
+      console.error('listen error', err);
+      renderEntries([]);
+    });
+  </script>
 </body>
 </html>
