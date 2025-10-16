@@ -15,8 +15,8 @@
       --glow-color: #FF3333;
       --gradient-start: #101010;
       --gradient-end: #000000;
-      --primary-red-rgb: 231,0,0; /* Utility for rgba */
-      --discord-blue: #5865F2; /* Discord brand color */
+      --primary-red-rgb: 231,0,0;
+      --discord-blue: #5865F2;
     }
 
     body {
@@ -30,6 +30,84 @@
       min-height: 100vh;
       display: flex;
       flex-direction: column;
+    }
+
+    /* --- INTRO SCREEN --- */
+    .intro-screen {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: #000;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 10000;
+      opacity: 1;
+      transition: opacity 0.8s ease-out;
+    }
+    
+    .intro-screen.fade-out {
+      opacity: 0;
+      pointer-events: none;
+    }
+    
+    .intro-logo {
+      width: 160px;
+      height: 160px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 30px;
+      border: 4px solid rgba(231, 0, 0, 0.4);
+      animation: logoGlowRed 2s ease-in-out;
+    }
+    
+    @keyframes logoGlowRed {
+      0%, 100% { 
+        box-shadow: 0 0 20px rgba(231, 0, 0, 0.3); 
+      }
+      50% { 
+        box-shadow: 0 0 40px rgba(231, 0, 0, 0.6), 0 0 60px rgba(231, 0, 0, 0.4); 
+      }
+    }
+    
+    .intro-title {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 48px;
+      font-weight: 900;
+      letter-spacing: 8px;
+      color: var(--primary-red);
+      text-transform: uppercase;
+      text-shadow: 0 0 30px var(--glow-color);
+      animation: titleFadeInRed 1.5s ease-out;
+    }
+    
+    @keyframes titleFadeInRed {
+      from { 
+        opacity: 0; 
+        transform: translateY(20px);
+        text-shadow: 0 0 10px var(--glow-color);
+      }
+      to { 
+        opacity: 1; 
+        transform: translateY(0);
+        text-shadow: 0 0 40px var(--glow-color), 0 0 70px rgba(255,50,50,0.9);
+      }
+    }
+    /* --- END INTRO SCREEN --- */
+
+    /* Main content - initially hidden */
+    .main-content {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.8s ease-out;
+    }
+    
+    .main-content.visible {
+      opacity: 1;
+      transform: translateY(0);
     }
 
     /* Navigation Bar */
@@ -46,11 +124,11 @@
     .navbar-container {
       display: flex;
       justify-content: center;
-      align-items: center; /* Align items vertically */
+      align-items: center;
       max-width: 1200px;
       margin: 0 auto;
       padding: 0 20px;
-      flex-wrap: wrap; /* Allow items to wrap on smaller screens */
+      flex-wrap: wrap;
     }
 
     .nav-item {
@@ -68,7 +146,7 @@
       position: relative;
       z-index: 1;
       letter-spacing: 1px;
-      white-space: nowrap; /* Prevent nav links from breaking onto multiple lines */
+      white-space: nowrap;
     }
 
     .nav-link::before {
@@ -101,7 +179,7 @@
       z-index: 1;
       left: 50%;
       transform: translateX(-50%);
-      top: 100%; /* Position below the parent link */
+      top: 100%;
       border-radius: 8px;
       overflow: hidden;
       border: 1px solid var(--dark-red);
@@ -109,7 +187,7 @@
       opacity: 0;
       visibility: hidden;
       transition: opacity 0.3s ease, visibility 0.3s ease;
-      margin-top: 10px; /* Space between nav link and dropdown */
+      margin-top: 10px;
     }
 
     .nav-item:hover .dropdown-content {
@@ -136,12 +214,11 @@
       text-shadow: 0 0 5px rgba(255,255,255,0.5);
     }
 
-    /* Discord Button Specific Styles */
     .discord-button {
       background-color: var(--discord-blue);
       color: white;
       padding: 10px 20px;
-      border-radius: 50px; /* More rounded pill shape */
+      border-radius: 50px;
       text-decoration: none;
       font-family: 'Orbitron', sans-serif;
       font-size: 1em;
@@ -151,36 +228,36 @@
       gap: 10px;
       transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
       box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
-      margin-left: 40px; /* Space it out from other nav items */
-      border: 2px solid var(--discord-blue); /* Initial border */
+      margin-left: 40px;
+      border: 2px solid var(--discord-blue);
     }
 
     .discord-button:hover {
-      background-color: #7289DA; /* Lighter Discord blue on hover */
+      background-color: #7289DA;
       transform: translateY(-3px);
       box-shadow: 0 6px 20px rgba(var(--discord-blue), 0.6);
       border-color: #7289DA;
     }
 
     .discord-button img {
-      width: 24px; /* Adjust icon size */
+      width: 24px;
       height: 24px;
       vertical-align: middle;
-      filter: drop-shadow(0 0 5px rgba(255,255,255,0.7)); /* Subtle glow for icon */
+      filter: drop-shadow(0 0 5px rgba(255,255,255,0.7));
     }
 
     header {
-      background: url('banner.png') no-repeat center center/cover; /* Changed background to banner.png */
+      background: url('banner.png') no-repeat center center/cover;
       padding: 100px 20px;
       position: relative;
       overflow: hidden;
       border-bottom: 2px solid var(--primary-red);
       box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
-      min-height: 400px; /* Ensure a decent height for the banner */
+      min-height: 400px;
       display: flex;
       align-items: center;
       justify-content: center;
-      background-attachment: fixed; /* Optional: for parallax-like effect */
+      background-attachment: fixed;
     }
 
     header::before {
@@ -190,13 +267,13 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background: rgba(0, 0, 0, 0.4); /* Dark overlay for better text readability */
+      background: rgba(0, 0, 0, 0.4);
       z-index: 0;
     }
 
     header h1 {
       font-family: 'Orbitron', sans-serif;
-      font-size: 7vw; /* Responsive font size */
+      font-size: 7vw;
       margin: 0;
       position: relative;
       z-index: 1;
@@ -226,17 +303,17 @@
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
       gap: 30px;
-      perspective: 1000px; /* For 3D effects */
+      perspective: 1000px;
     }
 
     .card {
-      background: rgba(var(--primary-red-rgb), 0.05); /* Using rgba for transparency */
+      background: rgba(var(--primary-red-rgb), 0.05);
       border: 1px solid var(--border-color);
       border-radius: 18px;
       padding: 35px;
       box-shadow: 0 0 25px rgba(var(--primary-red-rgb), 0.15);
       transition: all 0.4s ease-in-out;
-      transform-style: preserve-3d; /* For 3D effects */
+      transform-style: preserve-3d;
       position: relative;
       overflow: hidden;
       display: flex;
@@ -246,7 +323,6 @@
       text-align: center;
     }
 
-    /* Inner glow effect on hover */
     .card::before {
         content: '';
         position: absolute;
@@ -310,34 +386,42 @@
     }
 
     /* Media Queries for Responsiveness */
-
-    /* For screens smaller than 768px (common tablet portrait and mobile) */
     @media (max-width: 768px) {
+      .intro-title {
+        font-size: 36px;
+        letter-spacing: 4px;
+      }
+      
+      .intro-logo {
+        width: 120px;
+        height: 120px;
+      }
+
       .navbar-container {
-        flex-direction: column; /* Stack nav items vertically */
+        flex-direction: column;
         padding: 10px;
       }
 
       .nav-item {
-        margin: 10px 0; /* Add vertical space between stacked items */
+        margin: 10px 0;
       }
 
       .nav-link {
-        font-size: 1em; /* Slightly smaller font for nav links */
+        font-size: 1em;
         padding: 8px 12px;
       }
 
       .dropdown-content {
-        min-width: unset; /* Remove min-width on small screens */
-        width: 100%; /* Make dropdown full width */
+        min-width: unset;
+        width: 100%;
         left: 0;
         transform: translateX(0);
         margin-top: 5px;
       }
 
       .discord-button {
-        margin-left: 0; /* Remove left margin */
-        margin-top: 20px; /* Add space above the button when stacked */
+        margin-left: 0;
+        margin-top: 20px;
         font-size: 0.9em;
         padding: 8px 15px;
       }
@@ -348,13 +432,13 @@
       }
 
       header h1 {
-        font-size: 10vw; /* Adjust responsive font size for smaller screens */
+        font-size: 10vw;
         letter-spacing: 4px;
       }
 
       main {
         padding: 30px 15px;
-        grid-template-columns: 1fr; /* Stack cards vertically on small screens */
+        grid-template-columns: 1fr;
         gap: 20px;
       }
 
@@ -363,11 +447,11 @@
       }
 
       .card h2 {
-        font-size: 1.8em; /* Smaller headings for cards */
+        font-size: 1.8em;
       }
 
       .card p {
-        font-size: 1em; /* Smaller paragraph text */
+        font-size: 1em;
       }
 
       footer {
@@ -376,8 +460,17 @@
       }
     }
 
-    /* For screens even smaller than 480px (very small mobile phones) */
     @media (max-width: 480px) {
+      .intro-title {
+        font-size: 28px;
+        letter-spacing: 2px;
+      }
+      
+      .intro-logo {
+        width: 100px;
+        height: 100px;
+      }
+
       .nav-link {
         font-size: 0.9em;
         padding: 7px 10px;
@@ -394,7 +487,7 @@
       }
 
       header h1 {
-        font-size: 12vw; /* Even smaller font size for very small screens */
+        font-size: 12vw;
         letter-spacing: 2px;
       }
 
@@ -409,53 +502,75 @@
   </style>
 </head>
 <body>
-  <nav class="navbar">
-    <div class="navbar-container">
-      <div class="nav-item">
-        <a href="#" class="nav-link">LEADERBOARD</a>
-        <div class="dropdown-content">
-          <a href="servercounting.html">SERVER COUNTING</a>
-          <a href="text.html">TEXT</a>
-          <a href="voice.html">VOICE</a>
+  <!-- Intro Screen -->
+  <div class="intro-screen" id="introScreen">
+    <img src="LB4logo2.png" alt="LB4 Logo" class="intro-logo">
+    <h1 class="intro-title">LB4 Company</h1>
+  </div>
+
+  <!-- Main Content -->
+  <div class="main-content" id="mainContent">
+    <nav class="navbar">
+      <div class="navbar-container">
+        <div class="nav-item">
+          <a href="#" class="nav-link">LEADERBOARD</a>
+          <div class="dropdown-content">
+            <a href="servercounting.html">SERVER COUNTING</a>
+            <a href="text.html">TEXT</a>
+            <a href="voice.html">VOICE</a>
+          </div>
         </div>
+        <div class="nav-item">
+          <a href="#" class="nav-link">OVERVIEW</a>
+        </div>
+        <div class="nav-item">
+          <a href="faq.html" class="nav-link">FAQ</a>
+        </div>
+        <!-- Discord Join Button -->
+        <a href="https://discord.gg/885psXPn8K" target="_blank" class="discord-button">
+          <img src="discord.png" alt="Discord Icon">
+          انضم إلينا في Discord
+        </a>
       </div>
-      <div class="nav-item">
-        <a href="#" class="nav-link">OVERVIEW</a>
+    </nav>
+
+    <header>
+      <h1>OVERRULE</h1>
+    </header>
+
+    <main>
+      <div class="card">
+        <h2>مجتمع اللاعبين النخبة</h2>
+        <p>مرحباً بك في <strong>OVERRULE</strong>، الملتقى الفاخر للاعبين حيث يجتمع المحترفون والهواة لبناء أقوى تكاتف مجتمعي في عالم الألعاب.</p>
       </div>
-      <div class="nav-item">
-        <a href="faq.html" class="nav-link">FAQ</a>
+
+      <div class="card">
+        <h2>بطولات متفوقة وفعاليات حصرية</h2>
+        <p>استعد لتجارب منافسة لا مثيل لها في بطولاتنا الحصرية، مع جوائز قيمة، تحديات مبتكرة، ومتعة متجددة لا تعرف التوقف.</p>
       </div>
-      <!-- Discord Join Button -->
-      <a href="https://discord.gg/885psXPn8K" target="_blank" class="discord-button">
-        <img src="discord.png" alt="Discord Icon">
-        انضم إلينا في Discord
-      </a>
-    </div>
-  </nav>
 
-  <header>
-    <h1>OVERRULE</h1>
-  </header>
+      <div class="card">
+        <h2>تواصل راقٍ ومجتمع متكامل</h2>
+        <p>انضم إلى نخبة من اللاعبين، كوّن علاقات استراتيجية وصداقات دائمة، وشارك أقصى إمكانات مهاراتك في بيئة احترافية.</p>
+      </div>
+    </main>
 
-  <main>
-    <div class="card">
-      <h2>مجتمع اللاعبين النخبة</h2>
-      <p>مرحباً بك في <strong>OVERRULE</strong>، الملتقى الفاخر للاعبين حيث يجتمع المحترفون والهواة لبناء أقوى تكاتف مجتمعي في عالم الألعاب.</p>
-    </div>
+    <footer>
+      هذا الموقع من تصميم وتطوير <span>LB4 Company</span> &copy; 2023. جميع الحقوق محفوظة.
+    </footer>
+  </div>
 
-    <div class="card">
-      <h2>بطولات متفوقة وفعاليات حصرية</h2>
-      <p>استعد لتجارب منافسة لا مثيل لها في بطولاتنا الحصرية، مع جوائز قيمة، تحديات مبتكرة، ومتعة متجددة لا تعرف التوقف.</p>
-    </div>
-
-    <div class="card">
-      <h2>تواصل راقٍ ومجتمع متكامل</h2>
-      <p>انضم إلى نخبة من اللاعبين، كوّن علاقات استراتيجية وصداقات دائمة، وشارك أقصى إمكانات مهاراتك في بيئة احترافية.</p>
-    </div>
-  </main>
-
-  <footer>
-    هذا الموقع من تصميم وتطوير <span>Leo Mh</span> &copy; 2023. جميع الحقوق محفوظة.
-  </footer>
+  <script>
+    // Intro animation sequence
+    setTimeout(() => {
+      // Fade out intro screen
+      document.getElementById('introScreen').classList.add('fade-out');
+      
+      // Show main content after intro fades
+      setTimeout(() => {
+        document.getElementById('mainContent').classList.add('visible');
+      }, 300);
+    }, 3000); // 3 seconds intro display
+  </script>
 </body>
 </html>
